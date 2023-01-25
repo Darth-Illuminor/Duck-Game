@@ -1,0 +1,48 @@
+# In the anaconda prompt, Install the pygame and random library.
+# pip install pygame --> ENTER
+# pip install random --> ENTER
+import pygame
+import random
+
+# Initialize pygame
+pygame.init()
+
+# Set screen size
+screen = pygame.display.set_mode((800, 600))
+
+# Load duck image
+duck_image = pygame.image.load("C://Users//arosa//OneDrive//Desktop//WEGoT//2023//January//2023_01_25//duck.png")
+
+# Set duck starting position
+duck_x = random.randint(0, 800)
+duck_y = random.randint(0, 600)
+
+# Set game variables
+ducks_shot = 0
+game_over = False
+
+while not game_over:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            game_over = True
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            # Get mouse position
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            # Check if mouse position is on top of duck
+            if (mouse_x > duck_x and mouse_x < duck_x + 50) and (mouse_y > duck_y and mouse_y < duck_y + 50):
+                ducks_shot += 1
+                # Move duck to new random position
+                duck_x = random.randint(0, 800)
+                duck_y = random.randint(0, 600)
+
+    # Clear screen
+    screen.fill((0, 0, 0))
+
+    # Draw duck
+    screen.blit(duck_image, (duck_x, duck_y))
+
+    # Update display
+    pygame.display.update()
+
+# Quit pygame
+pygame.quit()
